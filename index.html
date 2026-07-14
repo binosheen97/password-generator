@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Password Generator - Free Strong & Secure Password Generator</title>
+    <meta name="description" content="Free password generator. Create strong, secure, random passwords instantly. Customize length, uppercase, lowercase, numbers, and symbols. Copy with one click.">
+    <meta name="keywords" content="password generator, strong password generator, random password generator, secure password, create password, password maker">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://binosheen97.github.io/password-generator/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Password Generator - Free Strong & Secure Passwords">
+    <meta property="og:description" content="Generate strong, secure, random passwords instantly. Free online password generator.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://binosheen97.github.io/password-generator/">
+
+    <!-- Google Verification -->
+    <meta name="google-site-verification" content="cBtI9qnEEtgjEyN--AIkGKP__lNGdHbMJEZI72XqDSo" />
+    <meta name="google-adsense-account" content="ca-pub-9209701505864374">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QV903LBHRQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-QV903LBHRQ');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9209701505864374" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔐 Password Generator</h1>
+            <p class="subtitle">Generate Strong & Secure Passwords Instantly</p>
+        </header>
+
+        <div class="main-layout">
+
+            <!-- Left: Generator -->
+            <div class="left-column">
+
+                <div class="generator-card">
+                    <h2>Generate Password</h2>
+
+                    <!-- Generated Password Display -->
+                    <div class="password-display" id="password-display">
+                        <span id="generated-password">Click Generate to create a password</span>
+                        <button class="copy-btn" id="copy-btn" onclick="copyPassword()" title="Copy password">
+                            📋
+                        </button>
+                    </div>
+
+                    <!-- Strength Bar -->
+                    <div class="strength-section" id="strength-section" style="display:none">
+                        <div class="strength-label">
+                            <span>Password Strength:</span>
+                            <span id="strength-text" class="strength-text"></span>
+                        </div>
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strength-fill"></div>
+                        </div>
+                    </div>
+
+                    <!-- Length Slider -->
+                    <div class="option-group">
+                        <div class="option-label-row">
+                            <label>Password Length</label>
+                            <span class="length-value" id="length-display">16</span>
+                        </div>
+                        <input type="range" id="length-slider" min="4" max="64" value="16" class="slider" oninput="updateLength(); generatePassword()">
+                        <div class="slider-labels">
+                            <span>4</span>
+                            <span>64</span>
+                        </div>
+                    </div>
+
+                    <!-- Character Options -->
+                    <div class="options-grid">
+                        <label class="checkbox-option">
+                            <input type="checkbox" id="opt-uppercase" checked onchange="generatePassword()">
+                            <span class="checkmark"></span>
+                            <div>
+                                <span class="opt-label">Uppercase Letters</span>
+                                <span class="opt-example">A B C D E F</span>
+                            </div>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" id="opt-lowercase" checked onchange="generatePassword()">
+                            <span class="checkmark"></span>
+                            <div>
+                                <span class="opt-label">Lowercase Letters</span>
+                                <span class="opt-example">a b c d e f</span>
+                            </div>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" id="opt-numbers" checked onchange="generatePassword()">
+                            <span class="checkmark"></span>
+                            <div>
+                                <span class="opt-label">Numbers</span>
+                                <span class="opt-example">0 1 2 3 4 5</span>
+                            </div>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" id="opt-symbols" checked onchange="generatePassword()">
+                            <span class="checkmark"></span>
+                            <div>
+                                <span class="opt-label">Symbols</span>
+                                <span class="opt-example">! @ # $ % ^</span>
+                            </div>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" id="opt-exclude-ambiguous" onchange="generatePassword()">
+                            <span class="checkmark"></span>
+                            <div>
+                                <span class="opt-label">Exclude Ambiguous</span>
+                                <span class="opt-example">No 0, O, l, 1, I</span>
+                            </div>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" id="opt-no-repeat" onchange="generatePassword()">
+                            <span class="checkmark"></span>
+                            <div>
+                                <span class="opt-label">No Repeating Characters</span>
+                                <span class="opt-example">Each char once only</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="btn-row">
+                        <button class="generate-btn" onclick="generatePassword()">
+                            🔄 Generate Password
+                        </button>
+                        <button class="generate-btn secondary" onclick="generateMultiple()">
+                            📋 Generate 5 Passwords
+                        </button>
+                    </div>
+
+                    <div class="copy-feedback" id="copy-feedback"></div>
+
+                    <!-- Multiple Passwords -->
+                    <div id="multiple-passwords" class="multiple-section"></div>
+                </div>
+
+                <!-- Ad Unit -->
+                <div class="ad-container">
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9209701505864374"
+                         data-ad-slot="auto"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </div>
+            </div>
+
+            <!-- Right: Tips & Info -->
+            <div class="right-column">
+
+                <div class="tips-card">
+                    <h3>🛡️ Password Strength Guide</h3>
+                    <div class="strength-guide">
+                        <div class="guide-item weak">
+                            <span class="dot"></span>
+                            <div>
+                                <strong>Weak</strong>
+                                <p>Less than 8 chars or only one type. Crackable in seconds.</p>
+                            </div>
+                        </div>
+                        <div class="guide-item fair">
+                            <span class="dot"></span>
+                            <div>
+                                <strong>Fair</strong>
+                                <p>8-11 chars with 2 types. Crackable in hours to days.</p>
+                            </div>
+                        </div>
+                        <div class="guide-item good">
+                            <span class="dot"></span>
+                            <div>
+                                <strong>Good</strong>
+                                <p>12-15 chars with 3 types. Resistant to most attacks.</p>
+                            </div>
+                        </div>
+                        <div class="guide-item strong">
+                            <span class="dot"></span>
+                            <div>
+                                <strong>Strong</strong>
+                                <p>16+ chars with all types. Virtually uncrackable.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tips-card">
+                    <h3>💡 Password Safety Tips</h3>
+                    <ul class="tips-list">
+                        <li>Use a different password for every account</li>
+                        <li>Use a password manager (Bitwarden, 1Password)</li>
+                        <li>Never share your password with anyone</li>
+                        <li>Enable 2-factor authentication (2FA)</li>
+                        <li>Change passwords after any data breach</li>
+                        <li>Avoid personal info (name, birthday, phone)</li>
+                        <li>Never use common passwords (123456, password)</li>
+                    </ul>
+                </div>
+
+                <div class="tips-card">
+                    <h3>🔒 How Secure is This?</h3>
+                    <p>All passwords are generated entirely in your browser using JavaScript's <code>crypto.getRandomValues()</code> — a cryptographically secure random number generator.</p>
+                    <p style="margin-top: 10px;">We <strong>never</strong> store, transmit, or log any generated passwords. Your passwords never leave your device.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="info-section">
+            <div class="info-card">
+                <h2>Why Use a Password Generator?</h2>
+                <p>Humans are predictable when creating passwords. We use names, dates, and common words that hackers can easily guess. A random password generator creates truly unpredictable passwords.</p>
+                <ul>
+                    <li>Protects against brute force attacks</li>
+                    <li>Protects against dictionary attacks</li>
+                    <li>Unique passwords prevent credential stuffing</li>
+                    <li>Long random passwords are virtually uncrackable</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h2>How Long Should a Password Be?</h2>
+                <ul>
+                    <li><strong>Minimum 12 characters</strong> for basic accounts</li>
+                    <li><strong>16+ characters</strong> for email & social media</li>
+                    <li><strong>20+ characters</strong> for banking & sensitive accounts</li>
+                    <li>Longer is always better — use 16+ as your default</li>
+                    <li>Include all character types for maximum security</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h2>Frequently Asked Questions</h2>
+                <ul>
+                    <li><strong>Is this safe?</strong> Yes! Passwords are generated locally in your browser and never sent anywhere.</li>
+                    <li><strong>Can I trust it?</strong> We use crypto.getRandomValues() — the same standard used by security professionals.</li>
+                    <li><strong>Should I memorize it?</strong> No — use a password manager to store them securely.</li>
+                    <li><strong>Is it free?</strong> Yes, completely free forever.</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p>
+                <strong>Calculators:</strong>
+                <a href="/age-calculator/">Age</a> |
+                <a href="/bmi-calculator/">BMI</a> |
+                <a href="/percentage-calculator/">Percentage</a> |
+                <a href="/date-calculator/">Date</a>
+            </p>
+            <p>
+                <strong>Tools:</strong>
+                <a href="/unit-converter/">Unit Converter</a> |
+                <a href="/password-generator/">Password Generator</a>
+            </p>
+            <p>
+                <a href="/">Home</a> |
+                <a href="/about.html">About Us</a> |
+                <a href="/contact.html">Contact</a> |
+                <a href="/privacy-policy.html">Privacy Policy</a> |
+                <a href="/terms-of-service.html">Terms of Service</a>
+            </p>
+            <p>&copy; 2026 Free Online Tools. Free password generator.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
